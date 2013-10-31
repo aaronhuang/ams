@@ -1,0 +1,17 @@
+
+<div class="container-fluid">
+  	<div class="row-fluid">
+    <div class="span5">
+	<form ng-submit="addUser()" ui-keypress="{13:'addUser()'}">
+  		<div>Add User</div>
+  		<div class="alert alert-danger" ng-show="hasErrorMsg" >{{errorMsg}}</div>
+		<div><input type="text" ng-model="user.username" class="form-control" placeholder="Pick a username" autofocus></div>
+		<div><input type="password"  ng-model="user.password" class="form-control" placeholder="Create a password"></div>
+		<div><input type="password"  ng-model="user.repassword" class="form-control" placeholder="Confirm your password"></div>
+		<div><input type="text"  ng-model="user.email" class="form-control" placeholder="Your email"></div>
+	</form>
+	<input type="submit" class="btn btn-info dropdown-toggle" ng-click="addUser()" value="Save" />
+	<button type="button" class="btn btn-info dropdown-toggle" ng-click="cancelSaveUser()">Cancel</button>
+	</div>
+	</div>
+</div>

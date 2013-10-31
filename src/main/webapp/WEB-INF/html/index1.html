@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="ams">
+<head>
+    <meta charset="utf-8">
+    <title>AMS</title>
+    <link rel="stylesheet" href="resources/css/app.css"/>
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+<div id="wrapper">
+
+   <ul class="nav nav-tabs">
+  		<li class="active">
+    		<a href="#">User</a>
+  		</li>
+  		<li><a href="#">Activity Management</a></li>
+  		<li><a href="#">Polling Management</a></li>
+  		<li><a href="#">Participate</a></li>
+	</ul>
+	
+    <hr class="" />
+    <div ng-view></div>
+
+</div>
+
+<script src="resources/js/lib/angular/angular.js"></script>
+<script src="resources/js/app.js"></script>
+<script src="resources/js/services.js"></script>
+<script src="resources/js/controllers/RailwayStationController.js"></script>
+<script src="resources/js/controllers/CarController.js"></script>
+<script src="resources/js/controllers/TrainController.js"></script>
+<script src="resources/js/filters.js"></script>
+<script src="resources/js/directives.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<div class="container-fluid" ng-controller="ModalDemoCtrl">
+  <div class="row-fluid">
+    
+    <div class="span8">
+	<input type="text" class="form-control" placeholder="Search" ng-model="query" >
+
+	
+	<div class="panel panel-default">
+  		<button type="button" class="btn btn-info dropdown-toggle" ng-click="open('myModalContent.html')">Add</button>
+  		<!-- <a href="#/adduser"><button type="button" class="btn btn-info dropdown-toggle" og-click="">Edit</button></a>
+  		<button type="button" class="btn btn-info dropdown-toggle" og-click="">Remove</button> -->
+	{{value1}}
+  		<table class="table"> 
+	  		<thead align="left">
+	  			<th><input type="checkbox" ng-model="selectAllUserFlag" ng-click="selectAllUser(selectAllUserFlag)" ></th>
+	  			<th>#</th>
+				<th>Username</th>
+				<th>Nickname</th>
+				<th>Action</th>
+			</thead>
+			<tr align="left" ng-repeat="user in users | filter:query | orderBy:orderProp">
+				<td width="5%">
+					<input type="checkbox" ng-model="selection.ids[user.id]" name="selectgroup" id="{{user.id}}" />
+				</td>
+				<td width="5%">{{$index+1}}</a></td>
+				<td width="30%"><a href="#" >{{user.username}}</td>
+				<td width="30%"><a href="#" >{{user.email}}</a></td>
+				<td width="30%">
+					<a href="#" ng-click="editUser(user.id,'myModalContent.html')">edit</a> |
+					<a href="#" ng-click="removeUser(user.id)">delete</a>
+				</td>
+			</tr>
+  		</table>
+	</div>
+    </div>
+  </div>
+  <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-body">
+            <div class="container-fluid">
+  				<div class="row-fluid">
+    			<div class="span13">
+				<form ng-submit="addUser()" ui-keypress="{13:'addUser()'}">
+  					<div>Add User</div>
+					 <table>
+  	<tr>
+  		<td width="30%">Username:</td>
+  		<td width="70%"><input type="text" ng-model="user.username" class="form-control" placeholder="Pick a username" autofocus></td>
+  	</tr>
+  	<tr>
+  		<td>Password:</td>
+  		<td><input type="password"  ng-model="user.password" class="form-control" placeholder="Create a password"></td>
+  	</tr>
+  	<tr>
+  		<td>Confirm Password:</td>
+  		<td><input type="password"  ng-model="user.repassword" class="form-control" placeholder="Confirm your password"></td>
+  	</tr>
+  	<tr>
+  		<td>Email:</td>
+  		<td><input type="text"  ng-model="user.email" class="form-control" placeholder="Your email"></td>
+  	</tr>
+  </table>
+  					</form>
+				</div>
+				</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-info" ng-click="addUser(user.id)">OK</button>
+            <button class="btn btn-info" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+    
+</div>
+
+ 
+  

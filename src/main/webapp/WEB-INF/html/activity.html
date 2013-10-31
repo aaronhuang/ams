@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" ng-app="amsActivity">
+<head>
+  	<meta charset="utf-8">
+  	<title>Activity Management System</title>
+  	<link rel="stylesheet" href="/ams/resources/bootstrap/css/bootstrap.css">
+  
+	<script src="/ams/resources/js/lib/angular/angular.js"></script>
+	<script src="/ams/resources/js/lib/angular/angular-route.js"></script>
+	<script src="/ams/resources/js/lib/angular/bootstrap-ui-tpls-0.6.0.js"></script>
+	
+	<script src="/ams/resources/js/activity.js"></script>
+	<script src="/ams/resources/js/controllers/ActivityController.js"></script>
+	<script src="/ams/resources/js/directives.js"></script>
+	<script src="/ams/resources/js/filters.js"></script>
+	<script src="/ams/resources/js/services.js"></script>
+	
+</head>
+<body>
+
+	<ul class="nav nav-tabs">
+  		<li >
+    		<a href="/ams">User</a>
+  		</li>
+  		<li class="active"><a href="#">Activity Management</a></li>
+  		<li><a href="#">Polling Management</a></li>
+  		<li><a href="#">Participate</a></li>
+	</ul>
+
+	<div ng-view></div>
+
+</body>
+</html>
