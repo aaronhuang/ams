@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
+import com.bigyellow.hm.common.CommonUtil;
+import com.bigyellow.hm.common.Constants;
 import com.bigyellow.hm.common.ValidateResult;
 import com.bigyellow.hm.dao.DrinkRecordDao;
 import com.bigyellow.hm.dao.GenericDaoException;
@@ -55,13 +57,16 @@ public class DrinkRecordResource {
 		ValidateResult result = new ValidateResult();
 		try {
 			DrinkRecord existed = this.dao.getTodayRecordByCup(uid, cupNumber);
-			if(existed == null) {
+			if (existed == null) {
 				existed = new DrinkRecord();
 				existed.setUid(uid);
 				Date current = Calendar.getInstance().getTime();
 				existed.setTime(current);
 				existed.setRecordTime(current);
 				existed.setCupNumber(cupNumber);
+				existed.setStarLevel(CommonUtil.calculateStarLevel(current,
+						Constants.drinkStandardTime[cupNumber - 1]));
+				logger.info("save to database : " + existed.toString());
 			}
 			this.dao.saveOrUpdate(existed);
 			result.setObj(existed);

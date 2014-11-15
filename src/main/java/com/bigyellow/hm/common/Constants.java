@@ -1,4 +1,3 @@
-
 package com.bigyellow.hm.common;
 
 /**
@@ -9,6 +8,7 @@ package com.bigyellow.hm.common;
 public class Constants {
 
 	public static final String PASSWORD = "******";
-	
-	
+	public static final String[] drinkStandardTime = { "7:00", "8:30", "10:00",
+			"11:00", "13:30", "15:00", "17:00", "20:30" };
+
 }

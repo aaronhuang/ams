@@ -62,6 +62,12 @@ public class HomeController {
 		Map<String , ? > maps = model.asMap();
 		String uid = (String) maps.get("uid");
 		logger.info("uid : " + uid);
+		if(uid == null) {
+			List<DrinkRecord> records = dao.getTodayRecords(user);
+			model.addAttribute("records", records);
+			model.addAttribute("uid", user);
+			model.addAttribute("readonly",true);
+		}
 		logger.info("user" + user);
 		
 		logger.info("uid in request" + request.getParameter("uid"));

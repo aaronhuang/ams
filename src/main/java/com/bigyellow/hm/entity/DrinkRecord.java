@@ -33,6 +33,8 @@ public class DrinkRecord extends BaseEntity {
 
 	private int total;
 
+	private int starLevel;
+	
 	private int cupNumber;
 
 	public String getUid() {
@@ -74,6 +76,17 @@ public class DrinkRecord extends BaseEntity {
 	public void setRecordTime(Date recordTime) {
 		this.recordTime = recordTime;
 	}
+	
+
+	public int getStarLevel() {
+		return starLevel;
+	}
+
+	public void setStarLevel(int starLevel) {
+		this.starLevel = starLevel;
+	}
+
+	
 
 	@Override
 	public int hashCode() {
@@ -82,6 +95,7 @@ public class DrinkRecord extends BaseEntity {
 		result = prime * result + cupNumber;
 		result = prime * result
 				+ ((recordTime == null) ? 0 : recordTime.hashCode());
+		result = prime * result + starLevel;
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		result = prime * result + total;
 		result = prime * result + ((uid == null) ? 0 : uid.hashCode());
@@ -104,6 +118,8 @@ public class DrinkRecord extends BaseEntity {
 				return false;
 		} else if (!recordTime.equals(other.recordTime))
 			return false;
+		if (starLevel != other.starLevel)
+			return false;
 		if (time == null) {
 			if (other.time != null)
 				return false;
@@ -123,6 +139,7 @@ public class DrinkRecord extends BaseEntity {
 	public String toString() {
 		return "DrinkRecord [uid=" + uid + ", time=" + time + ", recordTime="
 				+ recordTime + ", total=" + total + ", cupNumber=" + cupNumber
+				 + ", starLevel=" + starLevel
 				+ "]";
 	}
 
