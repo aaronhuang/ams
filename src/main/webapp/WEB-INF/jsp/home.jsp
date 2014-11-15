@@ -231,7 +231,7 @@
 										'</div> ' +
 										'<div ' +
 											'style="position: relative; width: 100%; height: 100%; ">' +
-											'<img src="/healthmanager/resources/images/planet_1.png" class="circle" ' +
+											'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' +
 												' style="position: absolute; z-index: 2;" /> <img ' +
 												' src="/healthmanager/resources/images/star_3.png" ' +
 												' style="width: 119px; height: 88px; position: absolute; z-index: 3; top: -2px; left: -16px;" />' +
@@ -241,7 +241,7 @@
 									'<p class="cupText">' + cupNumber + '</p>' + 
 								'</div>' + 
 								'<div style="position: relative; width: 100%; height: 100%;"' + forthCupSpecialCase + '>' + 
-									'<img src="/healthmanager/resources/images/planet_1.png" class="circle"' + 
+									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle"' + 
 										'style="position: absolute; z-index: 2;" /> <img' + 
 										'src="/healthmanager/resources/images/star_2.png"' + 
 										'style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
@@ -255,7 +255,7 @@
 									'<p class="cupText">' + cupNumber + '</p>' + 
 								'</div>' + 
 								'<div style="position: relative; width: 100%; height: 100%;' + forthCupSpecialCase + '">' + 
-									'<img src="/healthmanager/resources/images/planet_1.png" class="circle"' + 
+									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle"' + 
 										'style="position: absolute; z-index: 2;" /> <img ' + 
 										'src="/healthmanager/resources/images/star_2.png"' + 
 										'style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
@@ -284,8 +284,14 @@
 													$('#' + cupID).empty();
 													console.log("recordsSize : " + recordsSize);
 													console.log(data);
+													$('#contentHeader').empty();
+													
+													var qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
+													$('#contentHeader').html(qiezisaid);
 													displayCup(parseInt(innerCupNumber), 1, data.obj.starLevel);
 													displayCup(parseInt(innerCupNumber) + 1 , 0 ,null, drinkTime[innerCupNumber]);
+													
+													
 												},
 												url : "/healthmanager/rest/drinkrecord/add/" + uid + "/" + innerCupNumber ,
 												data : null,
