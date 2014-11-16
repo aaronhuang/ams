@@ -20,6 +20,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/healthmanager/resources/css/afui.custom.css" /> -->
 <link rel="stylesheet" type="text/css"
+	href="/healthmanager/resources/css/animate.min.css" />	
+<link rel="stylesheet" type="text/css"
 	href="/healthmanager/resources/css/home.css" />
 <script type="text/javascript" charset="utf-8"
 	src="/healthmanager/resources/js/appframework.min.js"></script>
@@ -256,44 +258,44 @@
 								
 							} else if(cupState === 1) {
 								if(starLevel === 3) {
-									cupStr = '<div align="center" style="' + forthCupSpecialCase + '" ' +
+									cupStr = '<div id="cupNumText'+ cupNumber + '" align="center" style="' + forthCupSpecialCase + '" ' +
 											'class="circle overlayText"> ' +
 											' <p class="cupText">' + cupNumber + '</p> ' +
 										'</div> ' +
-										'<div ' +
+										'<div id="cupImgArea'+ cupNumber + '" ' +
 											'style="position: relative; width: 100%; height: 100%; ' + forthCupSpecialCase + '">' +
-											'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' +
+											'<img id="cupCircle'+ cupNumber + '" src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' +
 												' style="position: absolute; z-index: 2;" /> <img ' +
-												' src="/healthmanager/resources/images/star_3.png" ' +
+												'  class="cupStar" src="/healthmanager/resources/images/star_3.png" ' +
 												' style="width: 119px; height: 88px; position: absolute; z-index: 3; top: -2px; left: -16px;" />' +
 										'</div>' ;
 								} else if(starLevel === 2) {
-									cupStr = '<div align="center" style="' + forthCupSpecialCase + '" class="circle overlayText">' + 
+									cupStr = '<div id="cupNumText'+ cupNumber + '" align="center" style="' + forthCupSpecialCase + '" class="circle overlayText">' + 
 									'<p class="cupText">' + cupNumber + '</p>' + 
 								'</div>' + 
-								'<div style="position: relative; width: 100%; height: 100%;' + forthCupSpecialCase + '">' + 
+								'<div id="cupImgArea'+ cupNumber + '" style="position: relative; width: 100%; height: 100%;' + forthCupSpecialCase + '">' + 
 									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' + 
-										'style="position: absolute; z-index: 2;" /> <img ' + 
-										'src="/healthmanager/resources/images/star_2.png"' + 
-										'style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
-									'<img src="/healthmanager/resources/images/star_2.png"' + 
-										'style="width: 20px; height: 17px; position: absolute; z-index: 4; top: 55px; left: 32px;" />' + 
-									'<img src="/healthmanager/resources/images/star_1.png"' + 
-										'style="width: 20px; height: 17px; position: absolute; z-index: 5; top: 55px; left: 54px;" />' + 
+										' style="position: absolute; z-index: 2;" /> <img ' + 
+										'  class="cupStar"  src="/healthmanager/resources/images/star_2.png" ' + 
+										' style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
+									'<img src="/healthmanager/resources/images/star_2.png" ' + 
+										'  class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 4; top: 55px; left: 32px;" />' + 
+									'<img src="/healthmanager/resources/images/star_1.png" ' + 
+										'  class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 5; top: 55px; left: 54px;" />' + 
 								'</div>	' ;
 								} else {
-									cupStr = '<div align="center" style="' + forthCupSpecialCase + '" class="circle overlayText">' + 
+									cupStr = '<div id="cupNumText'+ cupNumber + '" align="center" style="' + forthCupSpecialCase + '" class="circle overlayText">' + 
 									'<p class="cupText">' + cupNumber + '</p>' + 
 								'</div>' + 
-								'<div style="position: relative; width: 100%; height: 100%;' + forthCupSpecialCase + '">' + 
-									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle"' + 
-										'style="position: absolute; z-index: 2;" /> <img ' + 
-										'src="/healthmanager/resources/images/star_2.png"' + 
-										'style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
+								'<div id="cupImgArea'+ cupNumber + '" style="position: relative; width: 100%; height: 100%;' + forthCupSpecialCase + '">' + 
+									'<img id="cupCircle'+ cupNumber + '" src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle"' + 
+										' style="position: absolute; z-index: 2;" /> <img ' + 
+										' src="/healthmanager/resources/images/star_2.png" ' + 
+										' class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
 									'<img src="/healthmanager/resources/images/star_1.png"' + 
-										'style="width: 20px; height: 17px; position: absolute; z-index: 4; top: 55px; left: 32px;" />' + 
+										' class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 4; top: 55px; left: 32px;" />' + 
 									'<img src="/healthmanager/resources/images/star_1.png"' + 
-										'style="width: 20px; height: 17px; position: absolute; z-index: 5; top: 55px; left: 54px;" />' + 
+										' class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 5; top: 55px; left: 54px;" />' + 
 								'</div>	' ;
 								}
 								
@@ -315,9 +317,31 @@
 													$('#' + cupID).empty();
 													console.log("recordsSize : " + recordsSize);
 													console.log(data);
+													/** animate effect */
+													/**
+													$('#contentHeader').addClass('bounceOutUp');
 													drawHeaderText(recordsSize);
+													setTimeout(function(){
+														$('#contentHeader').removeClass('bounceOutUp');
+														$('#contentHeader').addClass('bounceInRight');
+														},100);*/
 													
 													displayCup(parseInt(innerCupNumber), 1, data.obj.starLevel);
+													$('#cupCircle'+innerCupNumber).addClass('animated bounceInRight');
+													$('#cupNumText'+innerCupNumber).hide();
+													$('#cupImgArea' + innerCupNumber).children('img.cupStar').hide();
+													setTimeout(function(){
+														$('#cupNumText'+innerCupNumber).show();
+														$('#cupNumText'+innerCupNumber).addClass('animated bounceInRight');
+														
+														setTimeout(function(){
+															$('#cupImgArea' + innerCupNumber).children('img.cupStar').show();
+															$('#cupImgArea' + innerCupNumber).children('img.cupStar').addClass('animated bounceInRight');
+															},200);
+														
+														},200);
+													
+													
 													displayCup(parseInt(innerCupNumber) + 1 , 0 ,null, drinkTime[innerCupNumber]);
 													
 													
@@ -344,9 +368,8 @@
 <body>
 
 	<div class="main">
-		<div id="contentHeader">茄子君说：已经喝了
+		<div id="contentHeader" class="animated">茄子君说：已经喝了
 				${fn:length(records)}杯水了！剩下的${8-fn:length(records)}杯也要加油！记得每杯200毫升左右噢～</div>
-
 
 		<div id="contentBody">
 		
