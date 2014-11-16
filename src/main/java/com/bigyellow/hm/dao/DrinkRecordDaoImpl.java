@@ -75,4 +75,23 @@ public class DrinkRecordDaoImpl extends BaseJpaDaoSupport<Integer, DrinkRecord>
 		return result;
 	}
 
+	public void clearRecords(String uid) {
+		List<DrinkRecord> result = new ArrayList<DrinkRecord>();
+		result = this.getAllRecords(uid);
+		logger.info("clear record: " + result.size());
+		for (DrinkRecord rec : result) {
+			this.getEm().remove(rec);
+		}
+		this.getEm().flush();
+	}
+
+	public List<DrinkRecord> getAllRecords(String uid) {
+		List<DrinkRecord> result = new ArrayList<DrinkRecord>();
+		Query query = this.getEm()
+				.createNamedQuery("DrinkRecord.findAllRecords")
+				.setParameter("uid", uid);
+		result = query.getResultList();
+		return result;
+	}
+
 }

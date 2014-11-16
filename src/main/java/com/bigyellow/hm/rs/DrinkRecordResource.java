@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -42,18 +43,19 @@ public class DrinkRecordResource {
 
 	@Autowired(required = true)
 	private MessageSource messageSource;
-	
+
 	public DrinkRecordResource() {
-		
+
 	}
 
 	@Path("/add/{uid}/{cupNumber}")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON )
-	public ValidateResult add(@PathParam("uid") String uid ,
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ValidateResult add(@PathParam("uid") String uid,
 			@PathParam("cupNumber") Integer cupNumber) {
-		logger.debug("drinkRecordAdd for uid: " + uid + ", cup number : " + cupNumber);
+		logger.debug("drinkRecordAdd for uid: " + uid + ", cup number : "
+				+ cupNumber);
 		ValidateResult result = new ValidateResult();
 		try {
 			DrinkRecord existed = this.dao.getTodayRecordByCup(uid, cupNumber);
@@ -74,14 +76,14 @@ public class DrinkRecordResource {
 			logger.error(e.getErrorMsg() + " : " + e.getMessage());
 			result.resolveErrorMsg(e.getErrorMsg());
 		}
-		
+
 		return result;
 	}
-	
+
 	@Path("/history/{uid}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON )
+	@Consumes(MediaType.APPLICATION_JSON)
 	public List<DrinkRecord> getHistory(@PathParam("uid") String uid) {
 		logger.debug("get history for uid: " + uid);
 		List<DrinkRecord> result = new ArrayList<DrinkRecord>();
@@ -89,17 +91,26 @@ public class DrinkRecordResource {
 		logger.debug("get history record size : " + result.size());
 		return result;
 	}
-	
+
 	@Path("/today/{uid}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON )
+	@Consumes(MediaType.APPLICATION_JSON)
 	public List<DrinkRecord> getToday(@PathParam("uid") String uid) {
 		logger.debug("get today for uid: " + uid);
 		List<DrinkRecord> result = this.dao.getTodayRecords(uid);
 		return result;
 	}
-	
-	
-	
+
+	@Path("/{uid}")
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ValidateResult clear(@PathParam("uid") String uid) {
+		logger.info("clear for uid: " + uid);
+		ValidateResult result = new ValidateResult();
+		this.dao.clearRecords(uid);
+		return result;
+	}
+
 }

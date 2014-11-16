@@ -35,12 +35,34 @@
 						var records = {};
 						var readonly = ${empty readonly};
 						var recordsSize = ${fn:length(records)};
+						var drinkTime = [ "7:00", "8:30", "10:00", "11:00",
+											"13:30", "15:00", "17:00", "20:30" ];
 						<c:forEach var="item" items="${records}" varStatus="status">
 						records['${item.cupNumber}'] = '${item.starLevel}';
 						</c:forEach>
 						
 						console.log(records);
 
+						/** debug function : tobe remove for production */
+						$('#resetBtn')
+						.on(
+								'click',
+								function(e) {
+									var opts = {
+										type : "DELETE",
+										success : function(data) {
+											records = {};
+											recordsSize = 0;
+											initAllCups();
+										},
+										url : "/healthmanager/rest/drinkrecord/" + uid,
+										data : null,
+										contentType : "application/json",
+										dataType : "json"
+									}
+									$.ajax(opts);
+								});
+						
 						$('#drinkBtn')
 								.on(
 										'click',
@@ -151,16 +173,9 @@
 							})();
 						}
 
-						var drinkTime = [ "7:00", "8:30", "10:00", "11:00",
-								"13:30", "15:00", "17:00", "20:30" ];
 						
-						for (var i = 0; i < 8; i++) {
-							if(records[i+1]) {
-								displayCup((i + 1), 1, parseInt(records[i+1]));
-							} else {
-								displayCup((i + 1), 0 , null, drinkTime[i]);
-							}
-						}
+						initAllCups();
+						
 						
 						/**
 						for (var i = 0; i < 8; i++) {
@@ -188,6 +203,22 @@
 								});
 							}
 						}*/
+						
+						function initAllCups() {
+							drawHeaderText(recordsSize);
+							for (var i = 0; i < 8; i++) {
+								if(records[i+1]) {
+									displayCup((i + 1), 1, parseInt(records[i+1]));
+								} else {
+									displayCup((i + 1), 0 , null, drinkTime[i]);
+								}
+							}
+						}
+						function drawHeaderText(recordsSize) {
+							$('#contentHeader').empty();
+							var qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
+							$('#contentHeader').html(qiezisaid);
+						}
 						
 						function displayCup(cupNumber , cupState , starLevel , timeText) {
 							var cupElementTd = $("#cup" + cupNumber);
@@ -225,12 +256,12 @@
 								
 							} else if(cupState === 1) {
 								if(starLevel === 3) {
-									cupStr = '<div align="center" style="" ' +
+									cupStr = '<div align="center" style="' + forthCupSpecialCase + '" ' +
 											'class="circle overlayText"> ' +
 											' <p class="cupText">' + cupNumber + '</p> ' +
 										'</div> ' +
 										'<div ' +
-											'style="position: relative; width: 100%; height: 100%; ">' +
+											'style="position: relative; width: 100%; height: 100%; ' + forthCupSpecialCase + '">' +
 											'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' +
 												' style="position: absolute; z-index: 2;" /> <img ' +
 												' src="/healthmanager/resources/images/star_3.png" ' +
@@ -240,7 +271,7 @@
 									cupStr = '<div align="center" style="' + forthCupSpecialCase + '" class="circle overlayText">' + 
 									'<p class="cupText">' + cupNumber + '</p>' + 
 								'</div>' + 
-								'<div style="position: relative; width: 100%; height: 100%;"' + forthCupSpecialCase + '>' + 
+								'<div style="position: relative; width: 100%; height: 100%;' + forthCupSpecialCase + '">' + 
 									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' + 
 										'style="position: absolute; z-index: 2;" /> <img ' + 
 										'src="/healthmanager/resources/images/star_2.png"' + 
@@ -284,10 +315,8 @@
 													$('#' + cupID).empty();
 													console.log("recordsSize : " + recordsSize);
 													console.log(data);
-													$('#contentHeader').empty();
+													drawHeaderText(recordsSize);
 													
-													var qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
-													$('#contentHeader').html(qiezisaid);
 													displayCup(parseInt(innerCupNumber), 1, data.obj.starLevel);
 													displayCup(parseInt(innerCupNumber) + 1 , 0 ,null, drinkTime[innerCupNumber]);
 													
@@ -315,12 +344,15 @@
 <body>
 
 	<div class="main">
-		<div>
-			<div id="contentHeader">茄子君说：已经喝了
+		<div id="contentHeader">茄子君说：已经喝了
 				${fn:length(records)}杯水了！剩下的${8-fn:length(records)}杯也要加油！记得每杯200毫升左右噢～</div>
 
-			<div id="contentBody">
-				<table width="100%">
+
+		<div id="contentBody">
+		
+		<div id="floater"></div>
+		<div id="content">
+			<table width="100%" style="margin-left: auto; margin-right: auto; ">
 					<tr class="cuptr">
 						<td width="33%" class="cuptd" id="cup1">
 						</td>
@@ -353,12 +385,13 @@
 						</td>
 					</tr>
 				</table>
-			</div>
-
 		</div>
+		
+				
+			</div>
 	</div>
 	<div class="footer">
-		<a class="selected">今天</a> | <a>往日</a>
+		<a class="selected">今天</a> | <a>往日</a> | <a id="resetBtn">清除</a>
 	</div>
 
 

@@ -17,7 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "DrinkRecord.findTodayRecords", query = "SELECT r FROM DrinkRecord r WHERE r.uid = :uid and r.time = :time"),
+		@NamedQuery(name = "DrinkRecord.findAllRecords", query = "SELECT r FROM DrinkRecord r WHERE r.uid = :uid"),
+		@NamedQuery(name = "DrinkRecord.findTodayRecords", query = "SELECT DISTINCT r FROM DrinkRecord r WHERE r.uid = :uid and r.time = :time"),
 		@NamedQuery(name = "DrinkRecord.findTodayRecordByCup", query = "SELECT r FROM DrinkRecord r WHERE r.uid = :uid and r.time = :time and r.cupNumber = :cupNumber"),
 		@NamedQuery(name = "DrinkRecord.findHistoryRecord", query = "SELECT r FROM DrinkRecord r WHERE r.uid = :uid and r.time < :time") })
 @XmlRootElement
