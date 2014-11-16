@@ -43,8 +43,6 @@
 						records['${item.cupNumber}'] = '${item.starLevel}';
 						</c:forEach>
 						
-						console.log(records);
-
 						/** debug function : tobe remove for production */
 						$('#resetBtn')
 						.on(
@@ -315,8 +313,6 @@
 													recordsSize = recordsSize + 1;
 													$('#' + cupID).unbind('click');
 													$('#' + cupID).empty();
-													console.log("recordsSize : " + recordsSize);
-													console.log(data);
 													
 													drawHeaderText(recordsSize);
 													/** animate effect */
@@ -342,10 +338,9 @@
 														
 														},200);
 													
-													
-													displayCup(parseInt(innerCupNumber) + 1 , 0 ,null, drinkTime[innerCupNumber]);
-													
-													
+													if(parseInt(innerCupNumber) <= 7) {
+														displayCup(parseInt(innerCupNumber) + 1 , 0 ,null, drinkTime[innerCupNumber]);
+													}
 												},
 												url : "/healthmanager/rest/drinkrecord/add/" + uid + "/" + innerCupNumber ,
 												data : null,
