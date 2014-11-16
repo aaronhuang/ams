@@ -317,10 +317,11 @@
 													$('#' + cupID).empty();
 													console.log("recordsSize : " + recordsSize);
 													console.log(data);
+													
+													drawHeaderText(recordsSize);
 													/** animate effect */
 													/**
 													$('#contentHeader').addClass('bounceOutUp');
-													drawHeaderText(recordsSize);
 													setTimeout(function(){
 														$('#contentHeader').removeClass('bounceOutUp');
 														$('#contentHeader').addClass('bounceInRight');
