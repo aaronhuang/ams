@@ -241,8 +241,8 @@
 									'<p class="cupText">' + cupNumber + '</p>' + 
 								'</div>' + 
 								'<div style="position: relative; width: 100%; height: 100%;"' + forthCupSpecialCase + '>' + 
-									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle"' + 
-										'style="position: absolute; z-index: 2;" /> <img' + 
+									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' + 
+										'style="position: absolute; z-index: 2;" /> <img ' + 
 										'src="/healthmanager/resources/images/star_2.png"' + 
 										'style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
 									'<img src="/healthmanager/resources/images/star_2.png"' + 
