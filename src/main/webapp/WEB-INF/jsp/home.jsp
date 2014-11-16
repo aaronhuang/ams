@@ -37,6 +37,7 @@
 						var records = {};
 						var readonly = ${empty readonly};
 						var recordsSize = ${fn:length(records)};
+						var glowFlag = true;
 						var drinkTime = [ "7:00", "8:30", "10:00", "11:00",
 											"13:30", "15:00", "17:00", "20:30" ];
 						<c:forEach var="item" items="${records}" varStatus="status">
@@ -173,9 +174,20 @@
 							})();
 						}
 
-						
 						initAllCups();
-						
+						glowClickableCircle();
+						function glowClickableCircle() {
+							if(glowFlag) {
+								glowFlag = false;
+								$('#clickableCircleImg').addClass('glow');
+								$('#clickableCircleImg').removeClass('glow_off');
+							}else {
+								glowFlag = true;
+								$('#clickableCircleImg').addClass('glow_off');
+								$('#clickableCircleImg').removeClass('glow');
+							}
+							setTimeout(function(){glowClickableCircle();},1000 );
+						}
 						
 						/**
 						for (var i = 0; i < 8; i++) {
@@ -238,7 +250,7 @@
 											'</div>' +
 										'</div>' +
 										'<div style="position: relative; width: 100%; height: 100%;' + forthCupSpecialCase + '">' +
-											'<img src="/healthmanager/resources/images/circle_on.png"' +
+											'<img id="clickableCircleImg" src="/healthmanager/resources/images/circle_on.png"' +
 												'style="position: absolute; z-index: 2; width: 90px; height: 90px;" />' +
 										'</div>';
 								} else {

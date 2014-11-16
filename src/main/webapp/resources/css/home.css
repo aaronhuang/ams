@@ -112,3 +112,31 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	color: white;
 }
+
+.glow:hover {
+	-o-transition: 1s; /* Need for Transition on Opera */
+	transition: 1s -moz-transition:1s; /*Transition on Firefox */
+	-webkit-transition: 1s; /*Transition on Chrome-Safari */
+	border-radius: 100%;
+	/* Border Radius makes your "Box" with round angles, we set a 100% value to make a "circle" */
+	box-shadow: #37a6de 0 0 1px;
+	/* Create Shadow around our "Box" with COLOR:#37a6de and Position X-offset:0 Y-offset:0 and "Distance of Shadow":1px. I Assume #37a6de as Background color of Twitter Icon */
+}
+
+.glow_off {
+	-o-transition: 1s; /* Need for Transition on Opera */
+	transition: 1s -moz-transition:1s; /*Transition on Firefox */
+	-webkit-transition: 1s; /*Transition on Chrome-Safari */
+	border-radius: 100%;
+	/* Border Radius makes your "Box" with round angles, we set a 100% value to make a "circle" */
+	box-shadow: #00FFE0 0 0 1px;
+	/* Create Shadow around our "Box" with COLOR:#37a6de and Position X-offset:0 Y-offset:0 and "Distance of Shadow":1px. I Assume #37a6de as Background color of Twitter Icon */
+}
+.glow {
+	-o-transition: 1s; /*exactly*/
+	transition: 1s /*the*/
+     -moz-transition:1s; /*same*/
+	-webkit-transition: 1s; /*as*/
+	border-radius: 100px; /*over*/
+	box-shadow: #00FFE0 0 0 15px; /*We just changed "distance of shadow"*/
+}
