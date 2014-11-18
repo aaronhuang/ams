@@ -1,7 +1,10 @@
 package com.bigyellow.hm.common;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 public class CommonUtil {
 
@@ -25,6 +28,31 @@ public class CommonUtil {
 		}
 
 		System.out.println("result : " + result);
+		return result;
+	}
+	
+	public static List<String> getQiezisaids() {
+		ArrayList<String> qiezisaids = new ArrayList<String>();
+		qiezisaids.add(Constants.qiezisaid1[getRandom(Constants.qiezisaid1.length)]);
+		qiezisaids.add(Constants.qiezisaid2[getRandom(Constants.qiezisaid2.length)]);
+		qiezisaids.add(Constants.qiezisaid3[getRandom(Constants.qiezisaid3.length)]);
+		qiezisaids.add(Constants.qiezisaid4[getRandom(Constants.qiezisaid4.length)]);
+		qiezisaids.add(Constants.qiezisaid5[getRandom(Constants.qiezisaid5.length)]);
+		qiezisaids.add(Constants.qiezisaid6[getRandom(Constants.qiezisaid6.length)]);
+		qiezisaids.add(Constants.qiezisaid7[getRandom(Constants.qiezisaid7.length)]);
+		qiezisaids.add(Constants.qiezisaid8[getRandom(Constants.qiezisaid8.length)]);
+		qiezisaids.add(Constants.qiezisaid9[getRandom(Constants.qiezisaid9.length)]);
+		qiezisaids.add(Constants.qiezisaid10[getRandom(Constants.qiezisaid10.length)]);
+		qiezisaids.add(Constants.qiezisaid11[getRandom(Constants.qiezisaid11.length)]);
+		qiezisaids.add(Constants.qiezisaid12[getRandom(Constants.qiezisaid12.length)]);
+		qiezisaids.add(Constants.qiezisaid13[getRandom(Constants.qiezisaid13.length)]);
+		qiezisaids.add(Constants.qiezisaid14[getRandom(Constants.qiezisaid14.length)]);
+		return qiezisaids;
+	}
+	
+	public static int getRandom(int size) {
+		Random ran = new Random();
+		int result = Math.abs(ran.nextInt())%size;
 		return result;
 	}
 	

@@ -40,6 +40,11 @@
 						var glowFlag = true;
 						var drinkTime = [ "7:00", "8:30", "10:00", "11:00",
 											"13:30", "15:00", "17:00", "20:30" ];
+						var qiezisaids = [];
+						<c:forEach var="item" items="${qiezisaids}" varStatus="status">
+						qiezisaids[<c:out value="${status.index}"/>] = '${item}';
+						</c:forEach>
+						
 						<c:forEach var="item" items="${records}" varStatus="status">
 						records['${item.cupNumber}'] = '${item.starLevel}';
 						</c:forEach>
@@ -155,25 +160,6 @@
 											$.ajax(opts);
 										});
 
-						function fade(elem, time) {
-							var startOpacity = elem.style.opacity || 1;
-							elem.style.opacity = startOpacity;
-
-							(function go() {
-								elem.style.opacity -= startOpacity
-										/ (time / 100);
-
-								// for IE
-								elem.style.filter = 'alpha(opacity='
-										+ elem.style.opacity * 100 + ')';
-
-								if (elem.style.opacity > 0)
-									setTimeout(go, 100);
-								else
-									elem.style.display = 'none';
-							})();
-						}
-
 						initAllCups();
 						glowClickableCircle();
 						function glowClickableCircle() {
@@ -228,7 +214,11 @@
 						}
 						function drawHeaderText(recordsSize) {
 							$('#contentHeader').empty();
-							var qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
+							var qiezisaid = getQieZiSaid(parseInt(recordsSize));
+							if(qiezisaid == null) {
+								qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
+							}
+							//var qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
 							$('#contentHeader').html(qiezisaid);
 						}
 						
@@ -364,8 +354,61 @@
 								}
 								</c:if>
 							}
-							
-							
+						}
+						function getTimeForHour(hourTime) {
+							var today = new Date();
+							console.log(hourTime);
+							var hour = parseInt(hourTime.split(":")[0]) - 1;
+							var min = parseInt(hourTime.split(":")[1]) - 1;
+							today.setHours(hour,min,0,0)
+							console.log(today.toString());
+							return today.getTime();
+						}
+						function getQieZiSaid(cupNum) {
+							console.log($('#content').find('img[src$="/star_3.png"]').length);
+							var result;
+							var refTime = new Date();
+							var currentTime = new Date().getTime();
+							if(cupNum === 0) {
+								if( currentTime >= getTimeForHour( "0:0") && currentTime < getTimeForHour("5:0")) {
+									result = qiezisaids[0];
+								} else if(currentTime >= getTimeForHour("5:0") && currentTime <= getTimeForHour("7:30")) {
+									result = qiezisaids[1];
+								} else if(currentTime > getTimeForHour("7:30") && currentTime <= getTimeForHour("8:30")) {
+									result = qiezisaids[2];
+								} else if(currentTime > getTimeForHour("8:30") && currentTime < getTimeForHour("13:30")) {
+									result = qiezisaids[3];
+								} else if(currentTime >= getTimeForHour("13:30") && currentTime <= getTimeForHour("20:30")) {
+									result = qiezisaids[4];
+								} else if(currentTime > getTimeForHour("20:30")) {
+									result = qiezisaids[5];
+								}
+							} else if(cupNum === 8) {
+								if( currentTime >= getTimeForHour("0:0") && currentTime < getTimeForHour("5:0")) {
+									result = qiezisaids[10];
+								} else if( currentTime >= getTimeForHour("5:0") && currentTime < getTimeForHour("20:0")) {
+									result = qiezisaids[11];
+								} else if( currentTime >= getTimeForHour("20:0") && currentTime < getTimeForHour("23:59")) {
+									var all3Star = $('#content').find('img[src$="/star_3.png"]').length;
+									if(all3Star === 8) {
+										result = qiezisaids[13];
+									} else {
+										result = qiezisaids[12];
+									}
+								} 
+							} else {
+								// 1 ~ 7 cups
+								if( currentTime >= getTimeForHour("0:0") && currentTime < getTimeForHour("5:0")) {
+									result = qiezisaids[6];
+								} else if( currentTime >= getTimeForHour("5:0") && currentTime <= (getTimeForHour(drinkTime[cupNum]) - 45*60*1000)) {
+									result = qiezisaids[7];
+								} else if( currentTime >= (getTimeForHour(drinkTime[cupNum]) - 45*60*1000) && currentTime <= getTimeForHour(drinkTime[cupNum+1])) {
+									result = qiezisaids[8];
+								}  else if( currentTime >=  getTimeForHour(drinkTime[cupNum+1])) {
+									result = qiezisaids[9];
+								}
+							}
+							return result;
 						}
 
 					});

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bigyellow.hm.common.CommonUtil;
 import com.bigyellow.hm.dao.DrinkRecordDao;
 import com.bigyellow.hm.entity.DrinkRecord;
 
@@ -48,6 +49,7 @@ public class HomeController {
 		
 		model.addFlashAttribute("records", records);
 		model.addFlashAttribute("uid", uid);
+		model.addFlashAttribute("qiezisaids", CommonUtil.getQiezisaids());
 		
 		// This will resolve to /WEB-INF/jsp/loginpage.jsp
 		
@@ -66,6 +68,7 @@ public class HomeController {
 			List<DrinkRecord> records = dao.getTodayRecords(user);
 			model.addAttribute("records", records);
 			model.addAttribute("uid", user);
+			model.addAttribute("qiezisaids", CommonUtil.getQiezisaids());
 			model.addAttribute("readonly",true);
 		}
 		logger.info("user" + user);
