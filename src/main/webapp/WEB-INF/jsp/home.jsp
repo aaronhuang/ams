@@ -287,11 +287,11 @@
 									'<img src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle" ' + 
 										' style="position: absolute; z-index: 2;" /> <img ' + 
 										'  class="cupStar"  src="/healthmanager/resources/images/star_2.png" ' + 
-										' style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
+										' style="width: 16px; height: 15px; position: absolute; z-index: 3; top: 52px; left: 13px;" />' + 
 									'<img src="/healthmanager/resources/images/star_2.png" ' + 
-										'  class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 4; top: 55px; left: 32px;" />' + 
+										'  class="cupStar" style="width: 16px; height: 15px; position: absolute; z-index: 4; top: 52px; left: 35px;" />' + 
 									'<img src="/healthmanager/resources/images/star_1.png" ' + 
-										'  class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 5; top: 55px; left: 54px;" />' + 
+										'  class="cupStar" style="width: 16px; height: 15px; position: absolute; z-index: 5; top: 52px; left: 57px;" />' + 
 								'</div>	' ;
 								} else {
 									cupStr = '<div id="cupNumText'+ cupNumber + '" align="center" style="' + forthCupSpecialCase + '" class="circle overlayText">' + 
@@ -301,11 +301,11 @@
 									'<img id="cupCircle'+ cupNumber + '" src="/healthmanager/resources/images/planet_' + cupNumber + '.png" class="circle"' + 
 										' style="position: absolute; z-index: 2;" /> <img ' + 
 										' src="/healthmanager/resources/images/star_2.png" ' + 
-										' class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 3; top: 55px; left: 10px;" />' + 
+										' class="cupStar" style="width: 16px; height: 15px; position: absolute; z-index: 3; top: 52px; left: 13px;" />' + 
 									'<img src="/healthmanager/resources/images/star_1.png"' + 
-										' class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 4; top: 55px; left: 32px;" />' + 
+										' class="cupStar" style="width: 16px; height: 15px; position: absolute; z-index: 4; top: 52px; left: 35px;" />' + 
 									'<img src="/healthmanager/resources/images/star_1.png"' + 
-										' class="cupStar" style="width: 20px; height: 17px; position: absolute; z-index: 5; top: 55px; left: 54px;" />' + 
+										' class="cupStar" style="width: 16px; height: 15px; position: absolute; z-index: 5; top: 52px; left: 57px;" />' + 
 								'</div>	' ;
 								}
 								
