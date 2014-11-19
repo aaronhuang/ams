@@ -9,7 +9,7 @@
 <!--HTML5 doctype-->
 <html>
 <head>
-<title>茄子健康-微习惯</title>
+<title>茄子健康-微习惯 : </title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -213,10 +213,21 @@
 							}
 						}
 						function drawHeaderText(recordsSize) {
+							var cups = parseInt(recordsSize);
+							var windowTitle = "茄子健康-微习惯: 准备在茄子健康-微习惯打卡每天8杯水，一起来吧？";
+							if( cups === 0) {
+								windowTitle = "茄子健康-微习惯: 准备在茄子健康-微习惯打卡每天8杯水，一起来吧？";
+							} else if( cups === 8) {
+								windowTitle = "茄子健康-微习惯: 哦耶！搞定今天的8杯水啦！打卡完成！明天也要加油！";
+							} else {
+								windowTitle = "茄子健康-微习惯: 每天8杯水打卡：今天喝掉" + recordsSize + "杯水啦！加油！加油！";
+							}
+							document.title=windowTitle;
 							$('#contentHeader').empty();
-							var qiezisaid = getQieZiSaid(parseInt(recordsSize));
+							var qiezisaid = getQieZiSaid(cups);
+							qiezisaid = qiezisaid.replace(/n/,recordsSize);
 							if(qiezisaid == null) {
-								qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
+								qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-cups)+ '杯也要加油！记得每杯200毫升左右噢～';
 							}
 							//var qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-recordsSize)+ '杯也要加油！记得每杯200毫升左右噢～';
 							$('#contentHeader').html(qiezisaid);
@@ -357,15 +368,12 @@
 						}
 						function getTimeForHour(hourTime) {
 							var today = new Date();
-							console.log(hourTime);
-							var hour = parseInt(hourTime.split(":")[0]) - 1;
-							var min = parseInt(hourTime.split(":")[1]) - 1;
+							var hour = parseInt(hourTime.split(":")[0]);
+							var min = parseInt(hourTime.split(":")[1]);
 							today.setHours(hour,min,0,0)
-							console.log(today.toString());
 							return today.getTime();
 						}
 						function getQieZiSaid(cupNum) {
-							console.log($('#content').find('img[src$="/star_3.png"]').length);
 							var result;
 							var refTime = new Date();
 							var currentTime = new Date().getTime();
@@ -400,11 +408,11 @@
 								// 1 ~ 7 cups
 								if( currentTime >= getTimeForHour("0:0") && currentTime < getTimeForHour("5:0")) {
 									result = qiezisaids[6];
-								} else if( currentTime >= getTimeForHour("5:0") && currentTime <= (getTimeForHour(drinkTime[cupNum]) - 45*60*1000)) {
+								} else if( currentTime >= getTimeForHour("5:0") && currentTime <= (getTimeForHour(drinkTime[cupNum-1]) - 45*60*1000)) {
 									result = qiezisaids[7];
-								} else if( currentTime >= (getTimeForHour(drinkTime[cupNum]) - 45*60*1000) && currentTime <= getTimeForHour(drinkTime[cupNum+1])) {
+								} else if( currentTime >= (getTimeForHour(drinkTime[cupNum-1]) - 45*60*1000) && currentTime <= getTimeForHour(drinkTime[cupNum])) {
 									result = qiezisaids[8];
-								}  else if( currentTime >=  getTimeForHour(drinkTime[cupNum+1])) {
+								}  else if( currentTime >=  getTimeForHour(drinkTime[cupNum])) {
 									result = qiezisaids[9];
 								}
 							}
@@ -465,7 +473,7 @@
 			</div>
 	</div>
 	<div class="footer">
-		<a class="selected">今天</a> | <a>往日</a> | <a id="resetBtn">清除</a>
+		<a class="selected">今天</a> | <a>往日</a>  <c:if  test="${empty readonly}"> |<a id="resetBtn">清除</a></c:if>
 	</div>
 
 

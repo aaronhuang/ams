@@ -137,5 +137,5 @@ body {
      -moz-transition:1s; /*same*/
 	-webkit-transition: 1s; /*as*/
 	border-radius: 100px; /*over*/
-	box-shadow: #00FFE0 0 0 15px; /*We just changed "distance of shadow"*/
+	box-shadow: #00FFE0 0 0 30px; /*We just changed "distance of shadow"*/
 }
