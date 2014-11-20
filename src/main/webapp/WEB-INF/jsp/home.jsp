@@ -225,6 +225,9 @@
 							document.title=windowTitle;
 							$('#contentHeader').empty();
 							var qiezisaid = getQieZiSaid(cups);
+							if(qiezisaid.indexOf("8-n") >= 0) {
+								qiezisaid = qiezisaid.replace(/8-n/,(8-recordsSize));
+							}
 							qiezisaid = qiezisaid.replace(/n/,recordsSize);
 							if(qiezisaid == null) {
 								qiezisaid = '茄子君说：已经喝了' + recordsSize + '杯水了！剩下的' + (8-cups)+ '杯也要加油！记得每杯200毫升左右噢～';
