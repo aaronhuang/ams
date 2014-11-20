@@ -205,13 +205,11 @@
 		</dependency> -->
 		
 		<!-- change to mariadb java client under LGPL license -->
-		<!-- 
 		<dependency>
 		  <groupId>org.mariadb.jdbc</groupId>
 		  <artifactId>mariadb-java-client</artifactId>
 		  <version>1.1.7</version>
 		</dependency>
-		 -->
 		
 		<!-- Databases - Uses HSQL by default to demo-->
 		<dependency>

@@ -476,7 +476,7 @@
 			</div>
 	</div>
 	<div class="footer">
-		<a class="selected">今天</a> | <a>往日</a>  <c:if  test="${empty readonly}"> |<a id="resetBtn">清除</a></c:if>
+		
 	</div>
 
 
