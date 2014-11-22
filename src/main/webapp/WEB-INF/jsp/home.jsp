@@ -26,6 +26,36 @@
 <script type="text/javascript" charset="utf-8"
 	src="/healthmanager/resources/js/appframework.min.js"></script>
 <script type="text/javascript">
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	    // 发送给好友
+	    WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+	        WeixinJSBridge.invoke('sendAppMessage', {
+	            "appid": "123",
+	            "img_url": "https://mmbiz.qlogo.cn/mmbiz/sEAlex1QSeSaLeDajbFAAYtmlD76XLc5QDBU0Inr29ehAA61u8HRheOCymjLQYL76SVcN63QgCqolc7gSOlj9A/0",
+	            "img_width": "60",
+	            "img_height": "60",
+	            "link": location.href,
+	            "desc":  document.title,
+	            "title": "茄子健康-微习惯"
+	        }, function (res) {
+	            _report('send_msg', res.err_msg);
+	        })
+	    });
+	
+	    // 分享到朋友圈
+	    WeixinJSBridge.on('menu:share:timeline', function (argv) {
+	        WeixinJSBridge.invoke('shareTimeline', {
+	            "img_url": "https://mmbiz.qlogo.cn/mmbiz/sEAlex1QSeSaLeDajbFAAYtmlD76XLc5QDBU0Inr29ehAA61u8HRheOCymjLQYL76SVcN63QgCqolc7gSOlj9A/0",
+	            "img_width": "60",
+	            "img_height": "60",
+	            "link": location.href,
+	            "desc":  document.title,
+	            "title": "茄子健康-微习惯：" + document.title 
+	        }, function (res) {
+	            _report('timeline', res.err_msg);
+	        });
+	    });
+	}, false);
 	$(document)
 			.ready(
 					function() {
@@ -40,6 +70,15 @@
 						var glowFlag = true;
 						var drinkTime = [ "7:00", "8:30", "10:00", "11:00",
 											"13:30", "15:00", "17:00", "20:30" ];
+						var shareDesc = ["茄子健康8杯水打卡~简单健康又有趣～大家都来试试吧！",
+						                 "茄子健康8杯水打卡：搞定1杯啦～好的开始！继续加油！",
+						                 "茄子健康8杯水打卡：2杯喽～2杯喽～心情棒棒哒～",
+						                 "茄子健康8杯水打卡：搞定3杯喽！差不多就一半了～",
+						                 "茄子健康8杯水打卡：4杯！半数达成！",
+						                 "茄子健康8杯水打卡：完成5杯啦！胜利在望！",
+						                 "茄子健康8杯水打卡：不知不觉6杯了～身心舒畅有木有～",
+						                 "茄子健康8杯水打卡：第7杯！只差1杯喽！",
+						                 "茄子健康8杯水打卡：第8杯！今日目标达成！明天再接再厉！"];
 						var qiezisaids = [];
 						<c:forEach var="item" items="${qiezisaids}" varStatus="status">
 						qiezisaids[<c:out value="${status.index}"/>] = '${item}';
@@ -214,13 +253,13 @@
 						}
 						function drawHeaderText(recordsSize) {
 							var cups = parseInt(recordsSize);
-							var windowTitle = "茄子健康-微习惯: 准备在茄子健康-微习惯打卡每天8杯水，一起来吧？";
+							var windowTitle = shareDesc[0];
 							if( cups === 0) {
-								windowTitle = "茄子健康-微习惯: 准备在茄子健康-微习惯打卡每天8杯水，一起来吧？";
-							} else if( cups === 8) {
-								windowTitle = "茄子健康-微习惯: 哦耶！搞定今天的8杯水啦！打卡完成！明天也要加油！";
+								windowTitle = shareDesc[0];
+							} else if( cups > 0 && cups <= 8) {
+								windowTitle = shareDesc[cups];
 							} else {
-								windowTitle = "茄子健康-微习惯: 每天8杯水打卡：今天喝掉" + recordsSize + "杯水啦！加油！加油！";
+								windowTitle = shareDesc[8];
 							}
 							document.title=windowTitle;
 							$('#contentHeader').empty();
@@ -421,7 +460,7 @@
 							}
 							return result;
 						}
-
+						
 					});
 </script>
 
@@ -476,7 +515,7 @@
 			</div>
 	</div>
 	<div class="footer">
-		
+		 
 	</div>
 
 
